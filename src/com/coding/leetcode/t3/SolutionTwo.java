@@ -1,4 +1,4 @@
-package com.coding.leetcode.longestsubstring;
+package com.coding.leetcode.t3;
 
 import java.util.HashSet;
 import java.util.Set;

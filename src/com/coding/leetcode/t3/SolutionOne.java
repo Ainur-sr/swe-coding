@@ -1,4 +1,4 @@
-package com.coding.leetcode.longestsubstring;
+package com.coding.leetcode.t3;
 
 public class SolutionOne {
 
