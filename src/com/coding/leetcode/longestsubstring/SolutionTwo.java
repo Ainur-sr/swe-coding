@@ -1,8 +1,9 @@
 package com.coding.leetcode.longestsubstring;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Solution {
+public class SolutionTwo {
 
 
     public static void main(String[] args) {
@@ -13,25 +14,27 @@ public class Solution {
     }
 
     public static int lengthOfLongestSubstring(String s) {
-        StringBuilder sb = new StringBuilder();
+        Set<Character> hashSet = new HashSet<>();
+        char[] chars = s.toCharArray();
         int max = 0;
         int startIndex = 0;
-        for (int i = 0; i < s.length(); i++) {
-            String symb = s.substring(i, i + 1);
 
-            if (sb.length() == 0){
+        for (int i = 0; i < chars.length; i++) {
+            char symb = chars[i];
+
+            if (hashSet.isEmpty()){
                 startIndex = i;
             }
 
-            if (sb.toString().contains(symb)) {
-                sb.setLength(0);
+            if (hashSet.contains(symb)) {
+                hashSet.clear();
                 i = startIndex;
             } else {
-                sb.append(symb);
+                hashSet.add(symb);
             }
 
-            if (max < sb.length()) {
-                max = sb.length();
+            if (max < hashSet.size()) {
+                max = hashSet.size();
             }
         }
 
