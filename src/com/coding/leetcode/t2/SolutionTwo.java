@@ -32,36 +32,43 @@ public class SolutionTwo {
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode result = null;
-        ListNode next = null;
-        int remainder = 0;
-        while (l1 != null || l2 != null) {
-            int n1 = l1 != null ? l1.val : 0;
-            int n2 = l2 != null ? l2.val : 0;
-            int sum = n1 + n2 + remainder;
-            remainder = sum / 10;
-            ListNode node = new ListNode(sum % 10);
 
-            if (result == null) {
-                result = node;
-                next = node;
-            } else {
-                if (result.next == null) {
-                    result.next = node;
-                    next = node;
-                } else {
-                    next.next = node;
-                    next = node;
-                }
-            }
-            l1 = l1 != null ? l1.next : null;
-            l2 = l2 != null ? l2.next : null;
-        }
-        if (remainder > 0) {
-            next.next = new ListNode(remainder);
+        ListNode result = new ListNode(0);
+        ListNode cur = result;
+
+        int surplus = 0;
+
+        while (l1 != null && l2 != null) {
+            int sum = l1.val + l2.val + surplus;
+            surplus = sum / 10;
+            cur.next = new ListNode(sum % 10);
+            cur = cur.next;
+
+            l1 = l1.next;
+            l2 = l2.next;
         }
 
-        return result;
+        while (l1 != null) {
+            int sum = l1.val + surplus;
+            surplus = sum / 10;
+            cur.next = new ListNode(sum % 10);
+            cur = cur.next;
+            l1 = l1.next;
+        }
+
+        while (l2 != null) {
+            int sum = l2.val + surplus;
+            surplus = sum / 10;
+            cur.next = new ListNode(sum % 10);
+            cur = cur.next;
+            l2 = l2.next;
+        }
+
+        if (surplus != 0) {
+            cur.next = new ListNode(surplus);
+        }
+
+        return result.next;
     }
 
 }
