@@ -16,11 +16,6 @@ public class Solution {
 
     public static int minEatingSpeed(int[] piles, int h) {
         long maxBananas = Arrays.stream(piles).max().getAsInt();
-        for (int pile : piles) {
-            if (pile > maxBananas) {
-                maxBananas = pile;
-            }
-        }
 
         long left = 1;
         long right = maxBananas;
