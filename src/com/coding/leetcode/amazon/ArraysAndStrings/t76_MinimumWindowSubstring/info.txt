@@ -1,0 +1,24 @@
+https://leetcode.com/problems/minimum-window-substring/description/
+
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            curEnd = i;
+
+            if (targetMap.containsKey(ch)) {
+                Integer chWinCount = windowMap.get(ch);
+                windowMap.put(ch, chWinCount + 1);
+
+                if (chWinCount.equals(targetMap.get(ch))) {
+                    winCount++;
+                }
+
+                if (winCount == targetCount) {
+
+
+                    end = i;
+                }
+
+            }
+
+        }
