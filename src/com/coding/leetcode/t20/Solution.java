@@ -1,4 +1,4 @@
-package com.coding.leetcode.epam.t20;
+package com.coding.leetcode.t20;
 
 import java.util.Stack;
 

@@ -1,6 +1,6 @@
 package com.coding.leetcode.t2;
 
-public class SolutionTwo {
+public class Solution {
 
     public static void main(String[] args) {
         ListNode listNode1 = create(new int[]{9, 9, 9, 9, 9, 9, 9});
@@ -32,44 +32,33 @@ public class SolutionTwo {
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode cur = head;
+        int extra = 0;
 
-        ListNode result = new ListNode(0);
-        ListNode cur = result;
 
-        int surplus = 0;
-
-        while (l1 != null && l2 != null) {
-            int sum = l1.val + l2.val + surplus;
-            surplus = sum / 10;
+        while (l1 != null || l2 != null) {
+            int sum = extra;
+            if (l1 != null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
             cur.next = new ListNode(sum % 10);
             cur = cur.next;
 
-            l1 = l1.next;
-            l2 = l2.next;
+            extra = sum / 10;
         }
 
-        while (l1 != null) {
-            int sum = l1.val + surplus;
-            surplus = sum / 10;
-            cur.next = new ListNode(sum % 10);
-            cur = cur.next;
-            l1 = l1.next;
+        if (extra != 0) {
+            cur.next = new ListNode(extra);
         }
-
-        while (l2 != null) {
-            int sum = l2.val + surplus;
-            surplus = sum / 10;
-            cur.next = new ListNode(sum % 10);
-            cur = cur.next;
-            l2 = l2.next;
-        }
-
-        if (surplus != 0) {
-            cur.next = new ListNode(surplus);
-        }
-
-        return result.next;
+        return head.next;
     }
 
 }
+
 

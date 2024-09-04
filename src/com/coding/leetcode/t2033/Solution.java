@@ -1,4 +1,4 @@
-package com.coding.leetcode.epam.t2033;
+package com.coding.leetcode.t2033;
 
 import java.util.Arrays;
 
