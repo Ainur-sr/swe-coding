@@ -2,14 +2,14 @@ package com.coding.leetcode.lyft.t146;
 
 import java.util.HashMap;
 
-public class LRUCache02 {
+public class LRUCache {
 
     private final Node head;
     private final Node tail;
     private final HashMap<Integer, Node> nodeMap;
     private final int capacity;
 
-    public LRUCache02(int capacity) {
+    public LRUCache(int capacity) {
         this.capacity = capacity;
         this.nodeMap = new HashMap<>();
 
