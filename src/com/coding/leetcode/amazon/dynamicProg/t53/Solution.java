@@ -1,4 +1,4 @@
-package com.coding.leetcode.t53;
+package com.coding.leetcode.amazon.dynamicProg.t53;
 
 public class Solution {
 
