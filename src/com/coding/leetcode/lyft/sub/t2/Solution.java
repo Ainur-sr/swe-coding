@@ -1,7 +1,5 @@
 package com.coding.leetcode.lyft.sub.t2;
 
-import com.coding.leetcode.t2.ListNode;
-
 public class Solution {
 
     public static void main(String[] args) {
