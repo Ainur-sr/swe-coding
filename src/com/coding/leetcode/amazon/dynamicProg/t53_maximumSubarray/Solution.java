@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.dynamicProg.t53;
+package com.coding.leetcode.amazon.dynamicProg.t53_maximumSubarray;
 
 public class Solution {
 
