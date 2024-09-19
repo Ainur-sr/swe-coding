@@ -36,7 +36,7 @@ public class Solution {
     public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
         Map<String, TreeMap<Integer, String>> map = new HashMap<>();
         for (int i = 0; i < username.length; i++) {
-            TreeMap<Integer, String> treeMap = map.computeIfAbsent(username[i], k -> new TreeMap<>());
+                TreeMap<Integer, String> treeMap = map.computeIfAbsent(username[i], k -> new TreeMap<>());
             treeMap.put(timestamp[i], website[i]);
         }
 
