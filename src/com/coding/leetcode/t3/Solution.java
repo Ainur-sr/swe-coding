@@ -16,16 +16,16 @@ public class Solution {
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 
         int max = 0;
-
-        for (int i = 0, j = 0; i < s.length(); ++i) {
-            Character ch = s.charAt(i);
+        int start = 0;
+        for (int cur = 0; cur < s.length(); ++cur) {
+            Character ch = s.charAt(cur);
 
             if (map.containsKey(ch)) {
-                j = Math.max(j, map.get(ch) + 1);
+                start = Math.max(start, map.get(ch) + 1);
             }
 
-            map.put(ch, i);
-            max = Math.max(max, i - j + 1);
+            map.put(ch, cur);
+            max = Math.max(max, cur - start + 1);
         }
 
         return max;
