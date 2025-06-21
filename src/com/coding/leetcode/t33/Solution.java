@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.sortingAndSearching.t33_SearchInRotatedSortedArray;
+package com.coding.leetcode.t33;
 
 public class Solution {
 
