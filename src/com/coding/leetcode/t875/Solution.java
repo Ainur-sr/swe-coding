@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t875_KokoEating;
+package com.coding.leetcode.t875;
 
 import java.util.Arrays;
 
