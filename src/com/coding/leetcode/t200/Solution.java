@@ -1,4 +1,4 @@
-package com.coding.leetcode.lyft.t200;
+package com.coding.leetcode.t200;
 
 public class Solution {
 
