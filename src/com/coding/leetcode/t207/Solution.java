@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.dynamicProg.t207_CourseSchedule;
+package com.coding.leetcode.t207;
 
 import java.util.*;
 
