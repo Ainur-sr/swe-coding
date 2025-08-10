@@ -1,4 +1,4 @@
-package com.coding.leetcode.microsoft.t18_4Sum;
+package com.coding.leetcode.t18;
 
 import java.util.*;
 

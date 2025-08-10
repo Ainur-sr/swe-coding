@@ -25,7 +25,9 @@ public class Solution {
                 int n1 = nums[i];
                 int n2 = nums[left];
                 int n3 = nums[right];
+
                 int sum = n1 + n2 + n3;
+
                 if (sum < 0) {
                     left++;
                 } else if (sum > 0) {
