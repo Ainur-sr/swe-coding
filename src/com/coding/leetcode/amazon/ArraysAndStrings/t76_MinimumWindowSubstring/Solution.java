@@ -16,7 +16,7 @@ public class Solution {
         if (s.length() < t.length()) return "";
 
         int resStart = 0;
-        int resEnd = -1;
+        int resEnd = 0;
         int resSize = Integer.MAX_VALUE;
 
         Map<Character, Integer> windowMap = new HashMap<>();
