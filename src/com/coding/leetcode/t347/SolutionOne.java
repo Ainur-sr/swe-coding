@@ -13,39 +13,21 @@ public class SolutionOne {
     }
 
     public static int[] topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int x : nums) freq.put(x, freq.getOrDefault(x, 0) + 1);
 
-        for(int num: nums){
-            map.put(num, map.getOrDefault(num, 0)+1);
-        }
-
-        TreeMap<Integer, List<Integer>> freqMap = new TreeMap<>();
-
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            Integer key = entry.getKey();
-            Integer freq = entry.getValue();
-            if (!freqMap.containsKey(freq)) {
-                freqMap.put(freq, new ArrayList<>());
-            }
-            freqMap.get(freq).add(key);
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0])); // min-heap по freq
+        for (var e : freq.entrySet()) {
+            pq.offer(new int[]{e.getValue(), e.getKey()});
+            if (pq.size() > k) pq.poll();
         }
 
         int[] res = new int[k];
-        int ind = 0;
-        while (ind < k){
-            Map.Entry<Integer, List<Integer>> entry = freqMap.pollLastEntry();
-            List<Integer> list = entry.getValue();
-            for (Integer integer : list) {
-                if (ind < k){
-                    res[ind] = integer;
-                    ind++;
-                } else{
-                    break;
-                }
-            }
+        for (int i = k - 1; i >= 0; i--) {
+            res[i] = pq.poll()[1]; // порядок не важен
         }
-
-        return  res;
+        return res;
     }
+
 
 }
