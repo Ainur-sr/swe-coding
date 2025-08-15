@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.design.t295_FindMedian;
+package com.coding.leetcode.t295_FindMedian;
 
 import java.util.PriorityQueue;
 
