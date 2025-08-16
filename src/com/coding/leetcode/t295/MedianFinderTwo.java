@@ -1,4 +1,4 @@
-package com.coding.leetcode.t295_FindMedian;
+package com.coding.leetcode.t295;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
