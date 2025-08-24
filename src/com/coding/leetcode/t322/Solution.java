@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.dynamicProg.t322_CoinChange;
+package com.coding.leetcode.t322;
 
 import java.util.Arrays;
 
@@ -18,13 +18,16 @@ public class Solution {
         for (int a = 1; a < amount + 1; a++) {
 
             for (int coin : coins) {
-                if (a - coin >= 0) {
+                int restMoney = a - coin;
+                if (restMoney >= 0) {
                     dp[a] = Math.min(dp[a], 1 + dp[a - coin]);
                 }
             }
         }
 
-        if (dp[amount] == amount + 1) return -1;
+        if (dp[amount] == amount + 1) {
+            return -1;
+        }
 
         return dp[amount];
     }
