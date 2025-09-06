@@ -1,11 +1,11 @@
-package com.coding.leetcode.amazon.dynamicProg.t139_WordBreak;
+package com.coding.leetcode.t139;
 
 import java.util.List;
 
-public class Solution2 {
+public class Solution {
 
     public static void main(String[] args) {
-        Solution2 sol = new Solution2();
+        Solution sol = new Solution();
 
         System.out.println(sol.wordBreak("leetcode", List.of("leet", "code"))); //true
         System.out.println(sol.wordBreak("applepenapple", List.of("apple", "pen"))); //true
@@ -23,13 +23,13 @@ public class Solution2 {
             for (String w : wordDict) {
                 if (i + w.length() <= s.length()) {
                     String sub = s.substring(i, i + w.length());
+
                     if (sub.equals(w)) {
                         dp[i] = dp[i + w.length()];
                     }
                 }
                 if (dp[i]) break;
             }
-
         }
 
         return dp[0];
