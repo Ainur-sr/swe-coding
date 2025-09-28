@@ -36,7 +36,7 @@ public class Solution {
 
             cur.add(candidates[i]);
             backtrack(i, candidates, target, newRem, resList, cur);
-            cur.removeLast();
+            cur.remove(cur.size() - 1);
         }
     }
 
