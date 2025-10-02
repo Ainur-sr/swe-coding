@@ -29,7 +29,7 @@ public class Solution {
         for (int i = start; i <= n; i++) {
             cur.add(i);
             backtrack(i + 1, n, k, resList, cur);
-            cur.removeLast();
+            cur.remove(cur.size() - 1);
         }
     }
 
