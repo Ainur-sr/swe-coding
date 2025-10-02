@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t15_3Sum;
+package com.coding.leetcode.t15;
 
 import java.util.ArrayList;
 import java.util.Arrays;
