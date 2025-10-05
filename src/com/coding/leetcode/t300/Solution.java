@@ -10,9 +10,9 @@ public class Solution {
         List<Integer> cache = new ArrayList<>();
 
         for (int num : nums) {
-            int bigIndex = findMinBiggerElement(cache, num, cacheSize);
+            int bigIndex = findMinBiggerElement(cache, num);
             if (bigIndex == -1) {
-                cache.add(num)
+                cache.add(num);
             } else {
                 cache.set(bigIndex, num);
             }
