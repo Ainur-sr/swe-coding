@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.sortingAndSearching.t167_TwoSum2;
+package com.coding.leetcode.t167;
 
 import java.util.Arrays;
 
