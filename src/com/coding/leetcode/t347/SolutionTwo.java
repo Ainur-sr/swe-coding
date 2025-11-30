@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class SolutionTwo {
 
-    public int[] topKFrequentBucket(int[] nums, int k) {
+    public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> freq = new HashMap<>();
         for (int x : nums) freq.put(x, freq.getOrDefault(x, 0) + 1);
 
@@ -22,7 +22,6 @@ public class SolutionTwo {
         int[] res = new int[k];
         int idx = 0;
         for (int f = buckets.length - 1; f >= 0; f--) {
-            if (idx >= k) break;
             if (buckets[f] == null) continue;
 
             for (int val : buckets[f]) {
