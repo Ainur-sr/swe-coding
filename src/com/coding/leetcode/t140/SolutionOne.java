@@ -2,10 +2,10 @@ package com.coding.leetcode.t140;
 
 import java.util.*;
 
-public class Solution {
+public class SolutionOne {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        SolutionOne solution = new SolutionOne();
         List<String> strings = solution.wordBreak("catsanddog", List.of("cat", "cats", "and", "sand", "dog"));
         System.out.println(strings);
     }
