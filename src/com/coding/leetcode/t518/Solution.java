@@ -4,15 +4,20 @@ public class Solution {
 
 
     public int change(int amount, int[] coins) {
-        int[] amtMap = new int[amount + 1];
-        amtMap[0] = 1;
+        int[] resArr = new int[amount + 1];
+        resArr[0] = 1;
 
         for (int coin : coins) {
-            for (int amt = coin; amt <= amount; amt++) {
-                amtMap[amt] += amtMap[amt - coin];
+            for (int a = 1; a <= amount; a++) {
+                int not_use_coin = resArr[a];
+                int use_coin = 0;
+                if (a - coin >= 0) {
+                    use_coin = resArr[a - coin];
+                }
+                resArr[a] = not_use_coin + use_coin;
             }
         }
 
-        return amtMap[amount];
+        return resArr[amount];
     }
 }
