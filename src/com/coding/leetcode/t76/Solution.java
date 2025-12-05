@@ -1,12 +1,12 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t76_MinimumWindowSubstring;
+package com.coding.leetcode.t76;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution2 {
+public class Solution {
 
     public static void main(String[] args) {
-        Solution2 solution2 = new Solution2();
+        Solution solution2 = new Solution();
         String s = solution2.minWindow("ADOBECODEBANC", "AABC");
         System.out.println(s);
     }
