@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t11_ContainerWithMostWater;
+package com.coding.leetcode.t11;
 
 public class Solution {
 
