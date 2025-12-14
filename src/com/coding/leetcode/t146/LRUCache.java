@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.design.t146_LruCache;
+package com.coding.leetcode.t146;
 
 import java.util.HashMap;
 
