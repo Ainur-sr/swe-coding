@@ -20,10 +20,10 @@ public class Solution {
     private PriorityQueue<Integer> maxQ;
 
     // Текущий размер minQ (с учётом помеченных на удаление элементов)
-    private int maxSize;
+    private int minQSize;
 
     // Текущий размер maxQ (с учётом помеченных на удаление элементов)
-    private int minSize;
+    private int maxQSize;
 
     // Размер скользящего окна
     private int k;
@@ -49,8 +49,8 @@ public class Solution {
         // minQ использует reverseOrder для создания max-heap
         this.minQ = new PriorityQueue<>(Comparator.reverseOrder());
         this.maxQ = new PriorityQueue<>();
-        this.maxSize = 0;
-        this.minSize = 0;
+        this.minQSize = 0;
+        this.maxQSize = 0;
         this.k = k;
         this.toRemoveMap = new HashMap<>();
 
@@ -88,11 +88,11 @@ public class Solution {
         // добавляем в minQ (меньшая половина)
         if (minQ.isEmpty() || num <= minQ.peek()) {
             minQ.offer(num);
-            maxSize++;
+            minQSize++;
         } else {
             // Иначе элемент принадлежит большей половине
             maxQ.offer(num);
-            minSize++;
+            maxQSize++;
         }
         // Балансируем кучи после добавления
         balance();
@@ -114,14 +114,14 @@ public class Solution {
         // и уменьшаем соответствующий счётчик размера
         if (!minQ.isEmpty() && num <= minQ.peek()) {
             // Элемент принадлежит меньшей половине (minQ)
-            maxSize--;
+            minQSize--;
             // Если удаляемый элемент на вершине minQ, очищаем вершину сразу
             if (!minQ.isEmpty() && Objects.equals(minQ.peek(), num)) {
                 prune(minQ);
             }
         } else {
             // Элемент принадлежит большей половине (maxQ)
-            minSize--;
+            maxQSize--;
             // Если удаляемый элемент на вершине maxQ, очищаем вершину сразу
             if (!maxQ.isEmpty() && Objects.equals(maxQ.peek(), num)) {
                 prune(maxQ);
@@ -142,18 +142,18 @@ public class Solution {
      */
     private void balance() {
         // Если minQ слишком большая (разница > 1), перемещаем элемент в maxQ
-        if (maxSize > minSize + 1) {
+        if (minQSize > maxQSize + 1) {
             maxQ.offer(minQ.poll());
-            maxSize--;
-            minSize++;
+            minQSize--;
+            maxQSize++;
             // Очищаем вершину minQ от помеченных элементов после перемещения
             prune(minQ);
         }
         // Если maxQ больше minQ, перемещаем элемент в minQ
-        else if (maxSize < minSize) {
+        else if (minQSize < maxQSize) {
             minQ.offer(maxQ.poll());
-            minSize--;
-            maxSize++;
+            maxQSize--;
+            minQSize++;
             // Очищаем вершину maxQ от помеченных элементов после перемещения
             prune(maxQ);
         }
