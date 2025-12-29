@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class SolutionTwo {
+public class Solution {
 
     public static void main(String[] args) {
-        SolutionTwo s = new SolutionTwo();
+        Solution s = new Solution();
         List<String> strings = s.wordBreak("catsanddog", List.of("cat", "cats", "and", "sand", "dog"));
         System.out.println(strings);
     }
@@ -33,19 +33,22 @@ public class SolutionTwo {
 
         for (int end = start; end < s.length(); end++) {
             String sub = s.substring(start, end + 1);
-            if (wordSet.contains(sub)) {
-
-                List<String> backtrackList = backtrack(end + 1, s, wordSet, cache);
-
-                for (String string : backtrackList) {
-                    String newStr = sub;
-                    if (!string.isBlank()) {
-                        newStr = newStr + " " + string;
-                    }
-                    resList.add(newStr);
-                }
+            if (!wordSet.contains(sub)) {
+                continue;
             }
+
+            List<String> backtrackList = backtrack(end + 1, s, wordSet, cache);
+
+            for (String string : backtrackList) {
+                String newStr = sub;
+                if (!string.isBlank()) {
+                    newStr = newStr + " " + string;
+                }
+                resList.add(newStr);
+            }
+
         }
+
         cache.put(start, resList);
         return resList;
     }
