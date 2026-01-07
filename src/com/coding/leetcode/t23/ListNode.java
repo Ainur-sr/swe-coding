@@ -1,12 +1,11 @@
-package com.coding.leetcode.amazon.linkedList.t23_MergekSortedLists;
+package com.coding.leetcode.t23;
 
 public class ListNode {
 
     int val;
     ListNode next;
 
-    ListNode() {
-    }
+    ListNode() { }
 
     ListNode(int val) {
         this.val = val;
