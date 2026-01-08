@@ -1,4 +1,4 @@
-package com.coding.leetcode.lyft.t42;
+package com.coding.leetcode.t42;
 
 public class Solution {
 
@@ -7,6 +7,10 @@ public class Solution {
     }
 
     public int trap(int[] height) {
+        if (height == null || height.length == 0) {
+            return 0;
+        }
+
         int leftInd = 0;
         int rightInd = height.length - 1;
         int res = 0;
