@@ -1,4 +1,4 @@
-package com.coding.leetcode.lyft.t994;
+package com.coding.leetcode.t994;
 
 import java.util.Arrays;
 import java.util.LinkedList;
