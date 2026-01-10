@@ -1,7 +1,6 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t937_ReorderDataLog;
+package com.coding.leetcode.t937;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class Solution {
 
@@ -28,15 +27,23 @@ public class Solution {
         Arrays.sort(logs, (log1, log2) -> {
             boolean isLog1Letter = Character.isLetter(log1.charAt(log1.length() - 1));
             boolean isLog2Letter = Character.isLetter(log2.charAt(log2.length() - 1));
+
             if (isLog1Letter && !isLog2Letter) return -1;
-            else if (!isLog1Letter && isLog2Letter) return 1;
-            else if (isLog1Letter && isLog2Letter) {
+
+            if (!isLog1Letter && isLog2Letter) return 1;
+
+             if (isLog1Letter && isLog2Letter) {
                 int id1Size = log1.indexOf(" ");
                 int id2Size = log2.indexOf(" ");
+
                 String content1 = log1.substring(id1Size + 1);
                 String content2 = log2.substring(id2Size + 1);
-                if (content1.equals(content2)) return log1.substring(0, id1Size).compareTo(log2.substring(0, id2Size));
-                else return content1.compareTo(content2);
+
+                if (content1.equals(content2)) {
+                    return log1.substring(0, id1Size).compareTo(log2.substring(0, id2Size));
+                }
+
+                return content1.compareTo(content2);
             }
             return 0;
         });
