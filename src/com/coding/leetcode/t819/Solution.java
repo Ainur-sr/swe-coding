@@ -1,4 +1,4 @@
-package com.coding.leetcode.t819_MostCommonWord;
+package com.coding.leetcode.t819;
 
 import java.util.HashMap;
 import java.util.HashSet;
