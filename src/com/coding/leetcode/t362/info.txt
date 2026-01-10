@@ -1,0 +1,5 @@
+Design Hit Counter (LC 362)
+
+https://leetcode.com/problems/design-hit-counter/description/
+
+
