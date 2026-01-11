@@ -1,11 +1,8 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t49_GroupAnagrams;
+package com.coding.leetcode.t49;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-class Solution2 {
+class Solution {
 
     public static void main(String[] args) {
         System.out.println(getHash("eat"));
@@ -26,10 +23,15 @@ class Solution2 {
     }
 
     private static String getHash(String str) {
-        char[] count = new char[26];
+        int[] count = new int[26];
         for (char c : str.toCharArray()) {
             count[c - 'a']++;
         }
-        return new String(count);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 26; i++) {
+            sb.append('#');
+            sb.append(count[i]);
+        }
+        return sb.toString();
     }
 }
