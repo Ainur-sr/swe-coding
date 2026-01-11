@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.design.t297_SerializeDeserializeBinaryTree;
+package com.coding.leetcode.t297;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -15,19 +15,19 @@ public class Codec {
 
     private void serializeHelper(StringBuilder sb, TreeNode treeNode){
         if (treeNode == null) {
-            sb.append("null");
+            sb.append("null,");
             return;
         }
 
         sb.append(treeNode.val).append(",");
         serializeHelper(sb, treeNode.left);
-        sb.append(",");
         serializeHelper(sb, treeNode.right);
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        Queue<String> queue = new LinkedList<>(Arrays.asList(data.split(",")));
+        String[] dataArr = data.split(",");
+        Queue<String> queue = new LinkedList<>(Arrays.asList(dataArr));
         return deserializeHelper(queue);
     }
 
@@ -41,5 +41,4 @@ public class Codec {
 
         return treeNode;
     }
-
 }

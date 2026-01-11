@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.design.t297_SerializeDeserializeBinaryTree;
+package com.coding.leetcode.t297;
 
 public class TreeNode {
 
