@@ -1,31 +1,29 @@
 package com.coding.leetcode.t3;
 
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Solution {
 
     public static void main(String[] args) {
-//        System.out.println(lengthOfLongestSubstring1("dvdf"));
-        System.out.println(lengthOfLongestSubstring("abcabcbb"));
+        Solution s = new Solution();
+        System.out.println(s.lengthOfLongestSubstring("pwwkew")); //3
+
     }
 
-    //O(N)time O(N)space
-    public static int lengthOfLongestSubstring(String s) {
-        if (s.length() == 0) return 0;
-
-        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
         int max = 0;
-        int start = 0;
-        for (int cur = 0; cur < s.length(); ++cur) {
-            Character ch = s.charAt(cur);
+        int l = 0;
 
-            if (map.containsKey(ch)) {
-                start = Math.max(start, map.get(ch) + 1);
+        for (int r = 0; r < s.length(); r++) {
+            char ch = s.charAt(r);
+            while (set.contains(ch)) {
+                set.remove(s.charAt(l));
+                l++;
             }
-
-            map.put(ch, cur);
-            max = Math.max(max, cur - start + 1);
+            set.add(ch);
+            max = Math.max(max, r - l  + 1);
         }
 
         return max;
