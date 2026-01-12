@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.sortingAndSearching.t253_meetingRooms2;
+package com.coding.leetcode.t253;
 
 import java.util.Arrays;
 
