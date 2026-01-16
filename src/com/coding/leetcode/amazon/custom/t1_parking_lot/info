@@ -1,0 +1,23 @@
+/*
+Problem Description
+
+There is a parking lot with a row of parking spots. Cars arrive one by one. Each driver has a preferred
+spot based on their destination (e.g., closest to a specific store, elevator, exit, etc.).
+
+Parking Rules:
+
+* The driver first tries to park at their preferred spot.
+* If that spot is already taken, the driver continues driving forward to find the next available spot.
+* Drivers cannot reverse.
+* If no spot is available from the preferred position to the end, the driver leaves without parking.
+
+Given the preferences of all arriving cars, determine whether everyone can successfully park.
+
+Clarifying Questions to Consider
+
+* How should the input be represented?
+* How are parking spots 0-indexed or 1-indexed
+* What should the function return?
+* What are the constraints on the number of cars and spots?
+* Come up with examples to better illustrate this problem.
+*/
