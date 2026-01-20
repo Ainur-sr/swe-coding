@@ -47,14 +47,16 @@ public class ParkingLotUnionFind {
      * @return номер первого свободного места
      */
     private int find(int[] nextFree, int pos) {
+        final int curSpot = nextFree[pos];
+
         // Если место указывает на себя - оно свободно
-        if (nextFree[pos] == pos) {
+        if (curSpot == pos) {
             return pos;
         }
 
         // Path compression: обновляем указатель напрямую на корень
         // Это оптимизирует последующие поиски
-        nextFree[pos] = find(nextFree, nextFree[pos]);
+        nextFree[pos] = find(nextFree, curSpot);
         return nextFree[pos];
     }
 
