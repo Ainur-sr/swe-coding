@@ -39,39 +39,17 @@ public class ParkingLotUnionFind {
     }
 
     /**
-     * Find операция с path compression
-     * Рекурсивно находит первое свободное место и сжимает путь
-     *
-     * @param nextFree массив указателей на следующие свободные места
-     * @param pos начальная позиция поиска
-     * @return номер первого свободного места
-     */
-    private int find(int[] nextFree, int pos) {
-        final int curSpot = nextFree[pos];
-
-        // Если место указывает на себя - оно свободно
-        if (curSpot == pos) {
-            return pos;
-        }
-
-        // Path compression: обновляем указатель напрямую на корень
-        // Это оптимизирует последующие поиски
-        nextFree[pos] = find(nextFree, curSpot);
-        return nextFree[pos];
-    }
-
-    /**
      * Итеративная версия find с path compression
      * Избегает рекурсии для предотвращения stack overflow при больших n
      *
      * @param nextFree массив указателей на следующие свободные места
-     * @param pos начальная позиция для поиска свободного места
+     * @param pref начальная позиция для поиска свободного места
      * @return номер первого свободного места начиная с позиции pos
      */
-    private int findIterative(int[] nextFree, int pos) {
+    private int find(int[] nextFree, int pref) {
         // Фаза 1: Находим корень (первое свободное место)
         // Идем по цепочке указателей пока не найдем место, указывающее на себя
-        int root = pos;
+        int root = pref;
         while (nextFree[root] != root) {
             root = nextFree[root];  // Переходим к следующему месту в цепочке
         }
@@ -79,10 +57,11 @@ public class ParkingLotUnionFind {
         // Фаза 2: Path compression (сжатие пути)
         // Проходим по цепочке снова и обновляем все промежуточные узлы
         // чтобы они указывали напрямую на корень (оптимизация для будущих поисков)
-        while (pos != root) {
-            int next = nextFree[pos];      // Сохраняем следующий узел в цепочке
-            nextFree[pos] = root;          // Обновляем текущий узел: теперь указывает на корень
-            pos = next;                    // Переходим к следующему узлу
+        int current = pref;
+        while (current != root) {
+            int next = nextFree[current];      // Сохраняем следующий узел в цепочке
+            nextFree[current] = root;          // Обновляем текущий узел: теперь указывает на корень
+            current = next;                    // Переходим к следующему узлу
         }
 
         return root;  // Возвращаем номер свободного места
