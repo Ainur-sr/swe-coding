@@ -1,0 +1,33 @@
+Базовое BST - Вставка, поиск, удаление
+Задача: Реализуйте класс Binary Search Tree со следующими методами:
+
+insert(int value) - вставить значение в дерево
+search(int value) - найти значение в дереве, вернуть true/false
+delete(int value) - удалить узел с заданным значением
+Пример:
+
+Input: insert(5), insert(3), insert(7), search(3), delete(3), search(3)
+Output: true, false
+
+
+-----------
+
+Отдельные задачи на LeetCode:
+1. Insert (Вставка):
+
+LeetCode 701. Insert into a Binary Search Tree
+Дан корень BST и значение для вставки
+Вернуть корень BST после вставки
+Уровень: Medium
+2. Search (Поиск):
+
+LeetCode 700. Search in a Binary Search Tree
+Дан корень BST и целевое значение
+Вернуть узел с этим значением или null
+Уровень: Easy
+3. Delete (Удаление):
+
+LeetCode 450. Delete Node in a BST
+Дан корень BST и ключ для удаления
+Вернуть корень BST после удаления
+Уровень: Medium

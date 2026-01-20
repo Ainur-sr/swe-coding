@@ -1,0 +1,44 @@
+Обход дерева
+Задача: Дано бинарное дерево. Реализуйте четыре типа обхода:
+
+In-order (левый → корень → правый)
+Pre-order (корень → левый → правый)
+Post-order (левый → правый → корень)
+Level-order (по уровням, слева направо)
+Пример:
+
+Дерево:     1
+           / \
+          2   3
+         / \
+        4   5
+
+In-order: [4, 2, 5, 1, 3]
+Pre-order: [1, 2, 4, 5, 3]
+Post-order: [4, 5, 2, 3, 1]
+Level-order: [1, 2, 3, 4, 5]
+
+
+-------
+
+Задачи на LeetCode:
+1. In-order Traversal:
+
+LeetCode 94. Binary Tree Inorder Traversal
+Дано бинарное дерево, вернуть in-order обход его узлов
+Уровень: Easy
+2. Pre-order Traversal:
+
+LeetCode 144. Binary Tree Preorder Traversal
+Дано бинарное дерево, вернуть pre-order обход его узлов
+Уровень: Easy
+3. Post-order Traversal:
+
+LeetCode 145. Binary Tree Postorder Traversal
+Дано бинарное дерево, вернуть post-order обход его узлов
+Уровень: Easy
+4. Level-order Traversal:
+
+LeetCode 102. Binary Tree Level Order Traversal
+Дано бинарное дерево, вернуть level-order обход его узлов
+Уровень: Medium
