@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t48_RotateImage;
+package com.coding.leetcode.t48;
 
 import java.util.Arrays;
 
