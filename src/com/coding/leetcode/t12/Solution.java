@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t12_IntegerToRoman;
+package com.coding.leetcode.t12;
 
 public class Solution {
 
