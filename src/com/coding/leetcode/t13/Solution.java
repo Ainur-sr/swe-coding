@@ -1,11 +1,11 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t13_RomanToInteger;
+package com.coding.leetcode.t13;
 
 import java.util.*;
 
-public class Solution2 {
+public class Solution {
 
     public static void main(String[] args) {
-        Solution2 sol2 = new Solution2();
+        Solution sol2 = new Solution();
         String r1 = "MCMXCIV"; //1994
         String r2 = "LVIII"; //58
         String r3 = "DCXXI"; //621
