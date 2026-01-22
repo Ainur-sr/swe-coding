@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t16_3SumClosest;
+package com.coding.leetcode.t16;
 
 import java.util.Arrays;
 
