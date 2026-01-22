@@ -27,16 +27,18 @@ public class Solution {
     }
 
     public void rotate(int[][] matrix) {
-        int s = matrix.length - 1;
-        int l = matrix.length / 2;
+        int lastInd = matrix.length - 1;
+        int mid = matrix.length / 2;
 
-        for (int i = 0; i < l; i++) {
-            for (int k = i; k < (s - i); k++) {
-                int tmp = matrix[i][k];
-                matrix[i][k] = matrix[s - k][i];
-                matrix[s - k][i] = matrix[s - i][s - k];
-                matrix[s - i][s - k] = matrix[k][s - i];
-                matrix[k][s - i] = tmp;
+        for (int i = 0; i < mid; i++) { // i: Текущий слой (от 0 до mid-1)
+
+            for (int k = i; k < (lastInd - i); k++) { // k: Позиция внутри текущего слоя
+
+                int tmp = matrix[i][k]; // сохраняем верхний левый элемент
+                matrix[i][k] = matrix[lastInd - k][i]; //  (левый нижний → левый верх)
+                matrix[lastInd - k][i] = matrix[lastInd - i][lastInd - k]; // (нижний правый → левый нижний)
+                matrix[lastInd - i][lastInd - k] = matrix[k][lastInd - i]; //  (правый верхний → нижний правый)
+                matrix[k][lastInd - i] = tmp; // (левый верх → правый верхний)
             }
         }
     }
