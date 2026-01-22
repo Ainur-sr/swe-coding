@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t28_strStr;
+package com.coding.leetcode.t28;
 
 public class Solution {
 
