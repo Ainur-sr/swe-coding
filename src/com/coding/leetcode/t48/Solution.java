@@ -5,13 +5,7 @@ import java.util.Arrays;
 public class Solution {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
-/*        int[][] arr1 = new int[][]{
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
-        };
-        solution.rotate(arr1);*/
+        Solution solution2 = new Solution();
 
         int[][] arr2 = new int[][]{
                 {5, 1, 9, 11},
@@ -19,7 +13,7 @@ public class Solution {
                 {13, 3, 6, 7},
                 {15, 14, 12, 16}
         };
-        solution.rotate(arr2);
+        solution2.rotate(arr2);
 
         for (int[] ints : arr2) {
             System.out.println(Arrays.toString(ints));
@@ -27,19 +21,33 @@ public class Solution {
     }
 
     public void rotate(int[][] matrix) {
-        int lastInd = matrix.length - 1;
-        int mid = matrix.length / 2;
+        int l = 0;
+        int r = matrix.length - 1;
 
-        for (int i = 0; i < mid; i++) { // i: Текущий слой (от 0 до mid-1)
+        while ( l < r )
+        {
+            for(int i = 0; i < r - l; i++)
+            {
+                int top = l;
+                int bottom = r;
+                //save the "top left"
+                int topLeft = matrix[top][l + i];
 
-            for (int k = i; k < (lastInd - i); k++) { // k: Позиция внутри текущего слоя
+                //move "bottom left" into "top left"
+                matrix[top][l + i] = matrix[bottom - i][l];
 
-                int tmp = matrix[i][k]; // сохраняем верхний левый элемент
-                matrix[i][k] = matrix[lastInd - k][i]; //  (левый нижний → левый верх)
-                matrix[lastInd - k][i] = matrix[lastInd - i][lastInd - k]; // (нижний правый → левый нижний)
-                matrix[lastInd - i][lastInd - k] = matrix[k][lastInd - i]; //  (правый верхний → нижний правый)
-                matrix[k][lastInd - i] = tmp; // (левый верх → правый верхний)
+                // move "bottom right" into "bottom left"
+                matrix[bottom - i][l] = matrix[bottom][r - i];
+
+                // move "top right" into "bottom right"
+                matrix[bottom][r - i] = matrix[top + i][r];
+
+                // move "top left" into "top right"
+                matrix[top + i][r] = topLeft;
             }
+
+            r -= 1;
+            l += 1;
         }
     }
 
