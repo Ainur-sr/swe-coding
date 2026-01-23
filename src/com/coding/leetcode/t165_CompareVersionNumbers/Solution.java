@@ -1,9 +1,9 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t165_CompareVersionNumbers;
+package com.coding.leetcode.t165_CompareVersionNumbers;
 
-public class Solution2 {
+public class Solution {
 
     public static void main(String[] args) {
-        Solution2 s = new Solution2();
+        Solution s = new Solution();
         int i = s.compareVersion("7.5.2.4", "7.5.3");
         System.out.println(i);
     }
