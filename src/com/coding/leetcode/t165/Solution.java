@@ -1,4 +1,4 @@
-package com.coding.leetcode.t165_CompareVersionNumbers;
+package com.coding.leetcode.t165;
 
 public class Solution {
 

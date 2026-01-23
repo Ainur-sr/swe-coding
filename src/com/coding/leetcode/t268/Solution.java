@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t268_MissingNumber;
+package com.coding.leetcode.t268;
 
 public class Solution {
 
