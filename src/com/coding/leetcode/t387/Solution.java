@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t387_FirstUniqueCharacter;
+package com.coding.leetcode.t387;
 
 import java.util.HashMap;
 
