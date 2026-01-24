@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.ArraysAndStrings.t273_IntegerToEnglishWords;
+package com.coding.leetcode.t273;
 
 public class Solution {
 
