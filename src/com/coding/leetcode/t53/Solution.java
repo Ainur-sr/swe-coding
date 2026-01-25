@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.dynamicProg.t53_maximumSubarray;
+package com.coding.leetcode.t53;
 
 public class Solution {
 
@@ -7,7 +7,7 @@ public class Solution {
     }
 
     public int maxSubArray(int[] nums) {
-        int max = Integer.MIN_VALUE;
+        int max = nums[0];
         int current = 0;
 
         for (int n : nums) {
