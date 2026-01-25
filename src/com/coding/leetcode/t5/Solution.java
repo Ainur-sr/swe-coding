@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.dynamicProg.t5_LongestPalindromicSubstring;
+package com.coding.leetcode.t5;
 
 public class Solution {
 
