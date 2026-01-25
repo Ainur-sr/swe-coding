@@ -1,7 +1,4 @@
-package com.coding.leetcode.amazon.dynamicProg.t121_BestTime;
-
-import java.util.Map;
-import java.util.TreeMap;
+package com.coding.leetcode.t121;
 
 public class Solution {
 
@@ -15,8 +12,8 @@ public class Solution {
     }
 
     public int maxProfit(int[] prices) {
-        int left = 0;
-        int right = 1;
+        int left = 0;  // buy
+        int right = 1; // sell
         int maxProfit = 0;
 
         while (right < prices.length) {
