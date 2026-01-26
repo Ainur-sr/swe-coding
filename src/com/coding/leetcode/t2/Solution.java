@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.linkedList.t2;
+package com.coding.leetcode.t2;
 
 public class Solution {
 
