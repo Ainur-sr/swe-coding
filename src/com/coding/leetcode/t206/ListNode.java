@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.linkedList.t206_ReverseLinkedList;
+package com.coding.leetcode.t206;
 
 public class ListNode {
 

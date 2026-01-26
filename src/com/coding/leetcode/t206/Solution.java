@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.linkedList.t206_ReverseLinkedList;
+package com.coding.leetcode.t206;
 
 public class Solution {
 
@@ -10,7 +10,7 @@ public class Solution {
         ListNode l1 = new ListNode(1, l2);
 
         Solution solution = new Solution();
-        ListNode listNode = solution.reverseList2(l1);
+        ListNode listNode = solution.reverseList(l1);
 
         while (listNode != null) {
             System.out.print(listNode.val + " -> ");
@@ -18,24 +18,25 @@ public class Solution {
         }
     }
 
-
-    public ListNode reverseList2(ListNode head) {
+    /**
+     * Iterative Approach
+     */
+    public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
-        ListNode curNode = head;
-        ListNode nextNode = head.next;
-        curNode.next = null;
+        ListNode prev = null;
+        ListNode cur = head;
 
-        while (nextNode != null) {
-            ListNode tmp = curNode;
-            curNode = nextNode;
-            nextNode = nextNode.next;
-            curNode.next = tmp;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
         }
 
-        return curNode;
+        return prev;
     }
 
 }
