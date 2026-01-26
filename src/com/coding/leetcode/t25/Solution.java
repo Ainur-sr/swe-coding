@@ -1,4 +1,4 @@
-package com.coding.leetcode.amazon.linkedList.t25_ReverseNodes;
+package com.coding.leetcode.t25;
 
 public class Solution {
 
@@ -15,6 +15,7 @@ public class Solution {
 
         ListNode head = s.reverseKGroup(l1, 3);
 
+        // res = 3, 2, 1, 6, 5, 4, 7, 8
         while (head != null) {
             System.out.print(head.val + ", ");
             head = head.next;
@@ -38,15 +39,15 @@ public class Solution {
             ListNode curr = groupPrev.next; // 1
 
             while (curr != groupNext) {
-                ListNode tmp = curr.next;
+                ListNode next = curr.next;
                 curr.next = prev;
                 prev = curr;
-                curr = tmp;
+                curr = next;
             }
 
-            ListNode tmp = groupPrev.next;
-            groupPrev.next = kGr;
-            groupPrev = tmp;
+            ListNode tmp = groupPrev.next; // 1
+            groupPrev.next = kGr; // 3 - for dummy
+            groupPrev = tmp; // for getKGroup()
         }
 
         return dummy.next;
