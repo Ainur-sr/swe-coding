@@ -21,7 +21,7 @@ public class SolutionTwo {
 
         int[] res = new int[k];
         int idx = 0;
-        for (int f = buckets.length - 1; f >= 0; f--) {
+        for (int f = buckets.length - 1; f >= 0 && idx < k; f--) {
             if (buckets[f] == null) continue;
 
             for (int val : buckets[f]) {
