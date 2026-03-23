@@ -57,8 +57,8 @@ public class SolutionTwo {
      * @param wordList  - словарь допустимых слов (изменяется в процессе)
      */
     private void bfs(String beginWord, String endWord, Set<String> wordList) {
-        Queue<String> q = new LinkedList<>();
-        q.add(beginWord);
+        Queue<String> queue = new LinkedList<>();
+        queue.add(beginWord);
 
         // Удаляем начальное слово из словаря (это первый уровень BFS)
         if (wordList.contains(beginWord)) {
@@ -76,16 +76,16 @@ public class SolutionTwo {
 
         // Основной цикл BFS
         // Останавливаемся, если очередь пуста ИЛИ нашли endWord на предыдущем уровне
-        while (!q.isEmpty() && !foundEndWord) {
+        while (!queue.isEmpty() && !foundEndWord) {
             // visited хранит все слова текущего уровня
             // Удаляем их из словаря только после обработки всего уровня
             List<String> visited = new ArrayList<String>();
 
             // Обрабатываем все слова текущего уровня
             // ВАЖНО: используем размер очереди ДО начала итерации
-            for (int i = q.size() - 1; i >= 0; i--) {
-                String currWord = q.peek();
-                q.remove();
+            for (int i = queue.size() - 1; i >= 0; i--) {
+                String currWord = queue.peek();
+                queue.remove();
 
                 // Находим всех соседей текущего слова
                 List<String> neighbors = findNeighbors(currWord, wordList);
@@ -113,7 +113,7 @@ public class SolutionTwo {
 
                     // Если слово еще не было добавлено в очередь
                     if (!isEnqueued.containsKey(word)) {
-                        q.add(word);
+                        queue.add(word);
                         isEnqueued.put(word, 1);
                     }
                 }
