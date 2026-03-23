@@ -29,11 +29,9 @@ public class SolutionTwo {
      * @param wordList  - список допустимых промежуточных слов
      * @return список всех кратчайших путей от beginWord до endWord
      */
-    public List<List<String>> findLadders(
-            String beginWord,
-            String endWord,
-            List<String> wordList
-    ) {
+    public List<List<String>> findLadders(String beginWord,
+                                          String endWord,
+                                          List<String> wordList) {
         // Копируем слова в Set для эффективного удаления в BFS (O(1))
         Set<String> copiedWordList = new HashSet<>(wordList);
 
@@ -50,6 +48,89 @@ public class SolutionTwo {
 
         return shortestPaths;
     }
+
+    /**
+     * BFS: строит ОБРАТНЫЙ граф и находит все кратчайшие пути
+     *
+     * @param beginWord - начальное слово
+     * @param endWord   - целевое слово
+     * @param wordList  - словарь допустимых слов (изменяется в процессе)
+     */
+    private void bfs(String beginWord, String endWord, Set<String> wordList) {
+        Queue<String> q = new LinkedList<>();
+        q.add(beginWord);
+
+        // Удаляем начальное слово из словаря (это первый уровень BFS)
+        if (wordList.contains(beginWord)) {
+            wordList.remove(beginWord);
+        }
+
+        // Отслеживаем, какие слова уже добавлены в очередь
+        // Используется вместо distance для экономии памяти
+        Map<String, Integer> isEnqueued = new HashMap<String, Integer>();
+        isEnqueued.put(beginWord, 1);
+
+        // Флаг: нашли ли мы endWord на текущем уровне
+        // Используется для early stopping - останавливаем BFS сразу после уровня с endWord
+        boolean foundEndWord = false;
+
+        // Основной цикл BFS
+        // Останавливаемся, если очередь пуста ИЛИ нашли endWord на предыдущем уровне
+        while (!q.isEmpty() && !foundEndWord) {
+            // visited хранит все слова текущего уровня
+            // Удаляем их из словаря только после обработки всего уровня
+            List<String> visited = new ArrayList<String>();
+
+            // Обрабатываем все слова текущего уровня
+            // ВАЖНО: используем размер очереди ДО начала итерации
+            for (int i = q.size() - 1; i >= 0; i--) {
+                String currWord = q.peek();
+                q.remove();
+
+                // Находим всех соседей текущего слова
+                List<String> neighbors = findNeighbors(currWord, wordList);
+
+                for (String word : neighbors) {
+                    // Помечаем слово как посещенное на этом уровне
+                    visited.add(word);
+
+                    // Инициализируем список предшественников для word, если его нет
+                    if (!adjList.containsKey(word)) {
+                        adjList.put(word, new ArrayList<String>());
+                    }
+
+                    // КЛЮЧЕВОЙ МОМЕНТ: добавляем ребро от word К currWord
+                    // Это ОБРАТНОЕ направление (reverse edge)
+                    // Позволяет потом идти от endWord к beginWord через backtracking
+                    adjList.get(word).add(currWord);
+
+                    // ОПТИМИЗАЦИЯ: проверяем, достигли ли целевого слова
+                    // Устанавливаем флаг, но НЕ прерываем цикл - нужно обработать весь уровень
+                    // чтобы найти ВСЕ кратчайшие пути одинаковой длины
+                    if (word.equals(endWord)) {
+                        foundEndWord = true;
+                    }
+
+                    // Если слово еще не было добавлено в очередь
+                    if (!isEnqueued.containsKey(word)) {
+                        q.add(word);
+                        isEnqueued.put(word, 1);
+                    }
+                }
+            }
+
+            // Удаляем все слова текущего уровня из словаря
+            // Это предотвращает циклы и гарантирует кратчайшие пути
+            // Удаление происходит ПОСЛЕ обработки всего уровня,
+            // что позволяет найти все пути одинаковой длины
+            for (int i = 0; i < visited.size(); i++) {
+                if (wordList.contains(visited.get(i))) {
+                    wordList.remove(visited.get(i));
+                }
+            }
+        }
+    }
+
 
     /**
      * Находит все слова из словаря, которые отличаются от word на одну букву
@@ -122,76 +203,6 @@ public class SolutionTwo {
 
             // Backtracking: удаляем последнее слово для проверки других путей
             currPath.remove(currPath.size() - 1);
-        }
-    }
-
-    /**
-     * BFS: строит ОБРАТНЫЙ граф и находит все кратчайшие пути
-     *
-     * @param beginWord - начальное слово
-     * @param endWord   - целевое слово
-     * @param wordList  - словарь допустимых слов (изменяется в процессе)
-     */
-    private void bfs(String beginWord, String endWord, Set<String> wordList) {
-        Queue<String> q = new LinkedList<>();
-        q.add(beginWord);
-
-        // Удаляем начальное слово из словаря (это первый уровень BFS)
-        if (wordList.contains(beginWord)) {
-            wordList.remove(beginWord);
-        }
-
-        // Отслеживаем, какие слова уже добавлены в очередь
-        // Используется вместо distance для экономии памяти
-        Map<String, Integer> isEnqueued = new HashMap<String, Integer>();
-        isEnqueued.put(beginWord, 1);
-
-        // Основной цикл BFS
-        while (q.size() > 0) {
-            // visited хранит все слова текущего уровня
-            // Удаляем их из словаря только после обработки всего уровня
-            List<String> visited = new ArrayList<String>();
-
-            // Обрабатываем все слова текущего уровня
-            // ВАЖНО: используем размер очереди ДО начала итерации
-            for (int i = q.size() - 1; i >= 0; i--) {
-                String currWord = q.peek();
-                q.remove();
-
-                // Находим всех соседей текущего слова
-                List<String> neighbors = findNeighbors(currWord, wordList);
-
-                for (String word : neighbors) {
-                    // Помечаем слово как посещенное на этом уровне
-                    visited.add(word);
-
-                    // Инициализируем список предшественников для word, если его нет
-                    if (!adjList.containsKey(word)) {
-                        adjList.put(word, new ArrayList<String>());
-                    }
-
-                    // КЛЮЧЕВОЙ МОМЕНТ: добавляем ребро от word К currWord
-                    // Это ОБРАТНОЕ направление (reverse edge)
-                    // Позволяет потом идти от endWord к beginWord через backtracking
-                    adjList.get(word).add(currWord);
-
-                    // Если слово еще не было добавлено в очередь
-                    if (!isEnqueued.containsKey(word)) {
-                        q.add(word);
-                        isEnqueued.put(word, 1);
-                    }
-                }
-            }
-
-            // Удаляем все слова текущего уровня из словаря
-            // Это предотвращает циклы и гарантирует кратчайшие пути
-            // Удаление происходит ПОСЛЕ обработки всего уровня,
-            // что позволяет найти все пути одинаковой длины
-            for (int i = 0; i < visited.size(); i++) {
-                if (wordList.contains(visited.get(i))) {
-                    wordList.remove(visited.get(i));
-                }
-            }
         }
     }
 
