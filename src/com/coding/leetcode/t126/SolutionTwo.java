@@ -13,13 +13,13 @@ import java.util.Set;
 public class SolutionTwo {
     // Граф смежности: ключ = слово, значение = список слов, ИЗ КОТОРЫХ можно попасть в ключ
     // ВАЖНО: это ОБРАТНЫЙ граф (reverse graph) - ребра идут в обратном направлении
-    Map<String, List<String>> adjList = new HashMap<String, List<String>>();
+    Map<String, List<String>> adjList = new HashMap<>();
 
     // Текущий путь при backtracking (строится от endWord к beginWord)
-    List<String> currPath = new ArrayList<String>();
+    List<String> currPath = new ArrayList<>();
 
     // Список всех найденных кратчайших путей
-    List<List<String>> shortestPaths = new ArrayList<List<String>>();
+    List<List<String>> shortestPaths = new ArrayList<>();
 
     /**
      * Главный метод: находит все кратчайшие последовательности трансформаций
@@ -67,7 +67,7 @@ public class SolutionTwo {
 
         // Отслеживаем, какие слова уже добавлены в очередь
         // Используется вместо distance для экономии памяти
-        Map<String, Integer> isEnqueued = new HashMap<String, Integer>();
+        Map<String, Integer> isEnqueued = new HashMap<>();
         isEnqueued.put(beginWord, 1);
 
         // Флаг: нашли ли мы endWord на текущем уровне
@@ -79,13 +79,11 @@ public class SolutionTwo {
         while (!queue.isEmpty() && !foundEndWord) {
             // visited хранит все слова текущего уровня
             // Удаляем их из словаря только после обработки всего уровня
-            List<String> visited = new ArrayList<String>();
+            List<String> visited = new ArrayList<>();
 
             // Обрабатываем все слова текущего уровня
-            // ВАЖНО: используем размер очереди ДО начала итерации
-            for (int i = queue.size() - 1; i >= 0; i--) {
-                String currWord = queue.peek();
-                queue.remove();
+            for (int i = 0; i < queue.size(); i--) {
+                String currWord = queue.poll();
 
                 // Находим всех соседей текущего слова
                 List<String> neighbors = findNeighbors(currWord, wordSet);
@@ -96,7 +94,7 @@ public class SolutionTwo {
 
                     // Инициализируем список предшественников для word, если его нет
                     if (!adjList.containsKey(word)) {
-                        adjList.put(word, new ArrayList<String>());
+                        adjList.put(word, new ArrayList<>());
                     }
 
                     // КЛЮЧЕВОЙ МОМЕНТ: добавляем ребро от word К currWord
@@ -141,29 +139,30 @@ public class SolutionTwo {
      * @return список соседних слов
      */
     private List<String> findNeighbors(String word, Set<String> wordList) {
-        List<String> neighbors = new ArrayList<String>();
-        char charList[] = word.toCharArray();
+        List<String> neighbors = new ArrayList<>();
+        char charArr[] = word.toCharArray();
 
         // Перебираем каждую позицию в слове
         for (int i = 0; i < word.length(); i++) {
-            char oldChar = charList[i]; // Сохраняем оригинальную букву
+            char oldChar = charArr[i]; // Сохраняем оригинальную букву
 
             // Заменяем i-ю букву на все буквы от a до z (кроме оригинальной)
             for (char c = 'a'; c <= 'z'; c++) {
-                charList[i] = c;
+                charArr[i] = c;
 
                 // Пропускаем, если буква та же или слова нет в словаре
-                if (c == oldChar || !wordList.contains(String.valueOf(charList))) {
+                if (c == oldChar || !wordList.contains(String.valueOf(charArr))) {
                     continue;
                 }
 
                 // Добавляем валидного соседа
-                neighbors.add(String.valueOf(charList));
+                neighbors.add(String.valueOf(charArr));
             }
 
             // Восстанавливаем оригинальную букву для следующей итерации
-            charList[i] = oldChar;
+            charArr[i] = oldChar;
         }
+
         return neighbors;
     }
 
@@ -178,7 +177,7 @@ public class SolutionTwo {
         // Базовый случай: достигли beginWord
         if (source.equals(destination)) {
             // Копируем текущий путь
-            List<String> tempPath = new ArrayList<String>(currPath);
+            List<String> tempPath = new ArrayList<>(currPath);
 
             // ВАЖНО: путь построен от конца к началу, поэтому разворачиваем
             Collections.reverse(tempPath);
