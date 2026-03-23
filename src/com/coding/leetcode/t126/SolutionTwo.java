@@ -22,6 +22,36 @@ public class SolutionTwo {
     List<List<String>> shortestPaths = new ArrayList<List<String>>();
 
     /**
+     * Главный метод: находит все кратчайшие последовательности трансформаций
+     *
+     * @param beginWord - начальное слово
+     * @param endWord   - целевое слово
+     * @param wordList  - список допустимых промежуточных слов
+     * @return список всех кратчайших путей от beginWord до endWord
+     */
+    public List<List<String>> findLadders(
+            String beginWord,
+            String endWord,
+            List<String> wordList
+    ) {
+        // Копируем слова в Set для эффективного удаления в BFS (O(1))
+        Set<String> copiedWordList = new HashSet<>(wordList);
+
+        // Шаг 1: Строим ОБРАТНЫЙ граф (DAG) используя BFS
+        // Граф содержит ребра от каждого слова к его предшественникам
+        bfs(beginWord, endWord, copiedWordList);
+
+        // Шаг 2: Начинаем backtracking от endWord
+        currPath.add(endWord);
+
+        // Шаг 3: Обходим граф от endWord к beginWord, собирая все пути
+        // Пути строятся в обратном порядке и разворачиваются в backtrack()
+        backtrack(endWord, beginWord);
+
+        return shortestPaths;
+    }
+
+    /**
      * Находит все слова из словаря, которые отличаются от word на одну букву
      *
      * @param word     - исходное слово
@@ -165,33 +195,4 @@ public class SolutionTwo {
         }
     }
 
-    /**
-     * Главный метод: находит все кратчайшие последовательности трансформаций
-     *
-     * @param beginWord - начальное слово
-     * @param endWord   - целевое слово
-     * @param wordList  - список допустимых промежуточных слов
-     * @return список всех кратчайших путей от beginWord до endWord
-     */
-    public List<List<String>> findLadders(
-            String beginWord,
-            String endWord,
-            List<String> wordList
-    ) {
-        // Копируем слова в Set для эффективного удаления в BFS (O(1))
-        Set<String> copiedWordList = new HashSet<>(wordList);
-
-        // Шаг 1: Строим ОБРАТНЫЙ граф (DAG) используя BFS
-        // Граф содержит ребра от каждого слова к его предшественникам
-        bfs(beginWord, endWord, copiedWordList);
-
-        // Шаг 2: Начинаем backtracking от endWord
-        currPath.add(endWord);
-
-        // Шаг 3: Обходим граф от endWord к beginWord, собирая все пути
-        // Пути строятся в обратном порядке и разворачиваются в backtrack()
-        backtrack(endWord, beginWord);
-
-        return shortestPaths;
-    }
 }
