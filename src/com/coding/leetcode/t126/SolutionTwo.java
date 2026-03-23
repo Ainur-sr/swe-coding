@@ -54,15 +54,15 @@ public class SolutionTwo {
      *
      * @param beginWord - начальное слово
      * @param endWord   - целевое слово
-     * @param wordList  - словарь допустимых слов (изменяется в процессе)
+     * @param wordSet  - словарь допустимых слов (изменяется в процессе)
      */
-    private void bfs(String beginWord, String endWord, Set<String> wordList) {
+    private void bfs(String beginWord, String endWord, Set<String> wordSet) {
         Queue<String> queue = new LinkedList<>();
         queue.add(beginWord);
 
         // Удаляем начальное слово из словаря (это первый уровень BFS)
-        if (wordList.contains(beginWord)) {
-            wordList.remove(beginWord);
+        if (wordSet.contains(beginWord)) {
+            wordSet.remove(beginWord);
         }
 
         // Отслеживаем, какие слова уже добавлены в очередь
@@ -88,7 +88,7 @@ public class SolutionTwo {
                 queue.remove();
 
                 // Находим всех соседей текущего слова
-                List<String> neighbors = findNeighbors(currWord, wordList);
+                List<String> neighbors = findNeighbors(currWord, wordSet);
 
                 for (String word : neighbors) {
                     // Помечаем слово как посещенное на этом уровне
@@ -124,8 +124,8 @@ public class SolutionTwo {
             // Удаление происходит ПОСЛЕ обработки всего уровня,
             // что позволяет найти все пути одинаковой длины
             for (int i = 0; i < visited.size(); i++) {
-                if (wordList.contains(visited.get(i))) {
-                    wordList.remove(visited.get(i));
+                if (wordSet.contains(visited.get(i))) {
+                    wordSet.remove(visited.get(i));
                 }
             }
         }
