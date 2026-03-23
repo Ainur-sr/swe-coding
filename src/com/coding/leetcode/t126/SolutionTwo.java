@@ -54,7 +54,7 @@ public class SolutionTwo {
      *
      * @param beginWord - начальное слово
      * @param endWord   - целевое слово
-     * @param wordSet  - словарь допустимых слов (изменяется в процессе)
+     * @param wordSet   - словарь допустимых слов (изменяется в процессе)
      */
     private void bfs(String beginWord, String endWord, Set<String> wordSet) {
         Queue<String> queue = new LinkedList<>();
@@ -64,11 +64,6 @@ public class SolutionTwo {
         if (wordSet.contains(beginWord)) {
             wordSet.remove(beginWord);
         }
-
-        // Отслеживаем, какие слова уже добавлены в очередь
-        // Используется вместо distance для экономии памяти
-        Map<String, Integer> isEnqueued = new HashMap<>();
-        isEnqueued.put(beginWord, 1);
 
         // Флаг: нашли ли мы endWord на текущем уровне
         // Используется для early stopping - останавливаем BFS сразу после уровня с endWord
@@ -82,7 +77,7 @@ public class SolutionTwo {
             List<String> visited = new ArrayList<>();
 
             // Обрабатываем все слова текущего уровня
-            for (int i = 0; i < queue.size(); i--) {
+            for (int i = 0; i < queue.size(); i++) {
                 String currWord = queue.poll();
 
                 // Находим всех соседей текущего слова
@@ -109,11 +104,7 @@ public class SolutionTwo {
                         foundEndWord = true;
                     }
 
-                    // Если слово еще не было добавлено в очередь
-                    if (!isEnqueued.containsKey(word)) {
-                        queue.add(word);
-                        isEnqueued.put(word, 1);
-                    }
+                    queue.add(word);
                 }
             }
 
