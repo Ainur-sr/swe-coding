@@ -75,35 +75,37 @@ public class SolutionTwo {
             // Удаляем их из словаря только после обработки всего уровня
             List<String> visited = new ArrayList<>();
 
+            final int levelSize = queue.size();
             // Обрабатываем все слова текущего уровня
-            for (int i = 0; i < queue.size(); i++) {
+            for (int i = 0; i < levelSize; i++) {
                 String currWord = queue.poll();
 
                 // Находим всех соседей текущего слова
                 List<String> neighbors = findNeighbors(currWord, wordSet);
 
-                for (String word : neighbors) {
-                    // Помечаем слово как посещенное на этом уровне
-                    visited.add(word);
-
+                for (String neighbor : neighbors) {
                     // Инициализируем список предшественников для word, если его нет
-                    if (!adjList.containsKey(word)) {
-                        adjList.put(word, new ArrayList<>());
+                    if (!adjList.containsKey(neighbor)) {
+                        adjList.put(neighbor, new ArrayList<>());
                     }
 
                     // КЛЮЧЕВОЙ МОМЕНТ: добавляем ребро от word К currWord
                     // Это ОБРАТНОЕ направление (reverse edge)
                     // Позволяет потом идти от endWord к beginWord через backtracking
-                    adjList.get(word).add(currWord);
+                    adjList.get(neighbor).add(currWord);
 
                     // ОПТИМИЗАЦИЯ: проверяем, достигли ли целевого слова
                     // Устанавливаем флаг, но НЕ прерываем цикл - нужно обработать весь уровень
                     // чтобы найти ВСЕ кратчайшие пути одинаковой длины
-                    if (word.equals(endWord)) {
+                    if (neighbor.equals(endWord)) {
                         foundEndWord = true;
                     }
-
-                    queue.add(word);
+                    // КЛЮЧЕВОЙ МОМЕНТ: добавляем в очередь только если слово новое на этом уровне
+                    if (!visited.contains(neighbor)) {
+                        // Помечаем слово как посещенное на этом уровне
+                        visited.add(neighbor);
+                        queue.add(neighbor);
+                    }
                 }
             }
 
