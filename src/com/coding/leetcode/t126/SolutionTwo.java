@@ -33,11 +33,11 @@ public class SolutionTwo {
                                           String endWord,
                                           List<String> wordList) {
         // Копируем слова в Set для эффективного удаления в BFS (O(1))
-        Set<String> copiedWordList = new HashSet<>(wordList);
+        Set<String> wordSet = new HashSet<>(wordList);
 
         // Шаг 1: Строим ОБРАТНЫЙ граф (DAG) используя BFS
         // Граф содержит ребра от каждого слова к его предшественникам
-        bfs(beginWord, endWord, copiedWordList);
+        bfs(beginWord, endWord, wordSet);
 
         // Шаг 2: Начинаем backtracking от endWord
         currPath.add(endWord);
@@ -185,12 +185,12 @@ public class SolutionTwo {
 
         // Перебираем все слова, ИЗ КОТОРЫХ можно попасть в source
         // (помним, что граф обратный)
-        for (int i = 0; i < adjList.get(source).size(); i++) {
+        for (String newWord : adjList.get(source)) {
             // Добавляем предшественника в путь
-            currPath.add(adjList.get(source).get(i));
+            currPath.add(newWord);
 
             // Рекурсивно идем дальше
-            backtrack(adjList.get(source).get(i), destination);
+            backtrack(newWord, destination);
 
             // Backtracking: удаляем последнее слово для проверки других путей
             currPath.remove(currPath.size() - 1);
