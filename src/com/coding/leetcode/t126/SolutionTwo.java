@@ -15,9 +15,6 @@ public class SolutionTwo {
     // ВАЖНО: это ОБРАТНЫЙ граф (reverse graph) - ребра идут в обратном направлении
     Map<String, List<String>> adjList = new HashMap<>();
 
-    // Текущий путь при backtracking (строится от endWord к beginWord)
-    List<String> currPath = new ArrayList<>();
-
     // Список всех найденных кратчайших путей
     List<List<String>> shortestPaths = new ArrayList<>();
 
@@ -40,11 +37,13 @@ public class SolutionTwo {
         bfs(beginWord, endWord, wordSet);
 
         // Шаг 2: Начинаем backtracking от endWord
+        // Текущий путь при backtracking (строится от endWord к beginWord)
+        List<String> currPath = new ArrayList<>();
         currPath.add(endWord);
 
         // Шаг 3: Обходим граф от endWord к beginWord, собирая все пути
         // Пути строятся в обратном порядке и разворачиваются в backtrack()
-        backtrack(endWord, beginWord);
+        backtrack(endWord, beginWord, currPath);
 
         return shortestPaths;
     }
@@ -163,8 +162,9 @@ public class SolutionTwo {
      *
      * @param source      - текущее слово (начинаем с endWord)
      * @param destination - целевое слово (beginWord)
+     * @param currPath - Текущий путь при backtracking (строится от endWord к beginWord)
      */
-    private void backtrack(String source, String destination) {
+    private void backtrack(String source, String destination, List<String> currPath) {
         // Базовый случай: достигли beginWord
         if (source.equals(destination)) {
             // Копируем текущий путь
@@ -190,7 +190,7 @@ public class SolutionTwo {
             currPath.add(newWord);
 
             // Рекурсивно идем дальше
-            backtrack(newWord, destination);
+            backtrack(newWord, destination, currPath);
 
             // Backtracking: удаляем последнее слово для проверки других путей
             currPath.remove(currPath.size() - 1);
